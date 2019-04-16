@@ -37,7 +37,7 @@ model.add(Dropout(0.25))
 model.add(Dense(24, activation = 'softmax'))
 
 train_data_dir = './Dataset'
-batch_size = 32
+batch_size = 128
 train_datagen = ImageDataGenerator(rescale=1./255,
                                    shear_range=0.2,
                                    zoom_range=0.2,
@@ -49,7 +49,7 @@ train_generator = train_datagen.flow_from_directory(
                         class_mode='categorical')
 
 test_data_dir = './Val'
-batch_size = 32
+batch_size = 128
 test_datagen = ImageDataGenerator(rescale=1./255,
                                    shear_range=0.2,
                                    zoom_range=0.2,
@@ -66,7 +66,7 @@ model.compile(optimizer='sgd', loss='categorical_crossentropy', metrics=['accura
 steps_per_epoch =  train_generator.n // batch_size
 validation_steps =  test_generator.n // batch_size
 
-nepochs = 10
+nepochs = 40
 
 hist = model.fit_generator(
     train_generator,
